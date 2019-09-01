@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingTop="5dp"
+    android:paddingRight="20dp"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:id="@+id/custom_list_data_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="0sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/custom_list_data_currentUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="CURRENT USER"
+        android:textSize="0sp"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/custom_list_data_bsl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="BSL"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:text="mmol/L"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="fill"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/custom_list_data_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:hint="BSL TYPE"
+            android:textAlignment="viewStart"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/custom_list_data_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:hint="DATE"
+            android:textAlignment="viewEnd"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="fill"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/custom_list_data_condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:hint="CONDITION"
+            android:textAlignment="viewStart"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/custom_list_data_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:hint="TIME"
+            android:textAlignment="viewEnd"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/custom_list_data_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="1sp"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/custom_list_data_mood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="1sp"
+        android:visibility="invisible" />
+
+</LinearLayout>

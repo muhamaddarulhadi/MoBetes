@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/delete"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/colorBackground"
+    android:orientation="vertical"
+    android:theme="@style/Theme.AppCompat.DayNight"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="What you want to do?"
+            android:textSize="25sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="45dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/custom_bottom_dialog_user_image_viewImage_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="VIEW IMAGE"
+                android:textSize="20sp"
+                android:theme="@style/darkTheme" />
+
+            <Button
+                android:id="@+id/custom_bottom_dialog_user_image_editImage_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EDIT IMAGE"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:theme="@style/darkTheme" />
+
+            <Button
+                android:id="@+id/custom_bottom_dialog_user_image_cancel_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CANCEL"
+                android:textSize="20sp"
+                android:theme="@style/darkTheme" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

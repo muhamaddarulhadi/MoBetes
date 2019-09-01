@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.baoyz.swipemenulistview.SwipeMenuListView>
+
+    <TextView
+        android:id="@+id/empty_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="fill"
+        android:text="No data yet"
+        android:textAlignment="center"
+        android:textColor="@color/greyish"
+        android:textSize="30sp"
+        android:visibility="gone"></TextView>
+
+    <TextView
+        android:id="@+id/fragment_data_2_currentUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="CURRENT USER"
+        android:visibility="invisible" />
+
+</android.support.constraint.ConstraintLayout>

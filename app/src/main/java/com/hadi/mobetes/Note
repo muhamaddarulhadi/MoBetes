@@ -1,0 +1,4 @@
+1. for scroll view, you cant adjust the margin and padding and its linear layout also cant because it will make the scroll error
+2. always use getActivity() before findViewById() on fragment
+3. when using scroll view, the first and last item on linear layout default come with scroll view can be set its margin for to make sure it can be scroll,
+    margin bottom must be 70dp
