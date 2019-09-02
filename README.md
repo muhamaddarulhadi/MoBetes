@@ -1,5 +1,5 @@
 ## MoBetes
-A minimal blood sugar monitor application that include several information about diabetes. 
+A minimal malaysian blood sugar monitor application that include several information about diabetes. 
 
 ## Features
 1. Insert blood sugar level using mmol/L measurement.
