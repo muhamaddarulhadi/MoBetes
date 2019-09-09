@@ -12,3 +12,4 @@ A minimal malaysian blood sugar monitor application that include several informa
 1. Java
 2. SQLite
 3. PHP
+4. HTML (just a little bit)
