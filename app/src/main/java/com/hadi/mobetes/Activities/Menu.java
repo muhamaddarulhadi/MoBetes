@@ -81,21 +81,42 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         }*/
 
         setContentView(R.layout.menu2);
-        setTitle("MoBetes");
+        //setTitle("MoBetes");
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
 
         new AppEula(this).show(); //call the eula agreement
-
-        //navigation view in drawer layout
-        navigationView = findViewById(R.id.navView);
-        navigationView.setNavigationItemSelectedListener(this);
 
         //bottom navigation
         mainNav = findViewById(R.id.bottom_navigation);
         mainNav.setOnNavigationItemSelectedListener(navListener);
         mainNav.setItemTextAppearanceActive(R.style.BottomNavigation);  //set the style when bottom navigation is active
         //mainNav.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.redLight)));
+
+        //drawer layout
+        slide = findViewById(R.id.drawer);
+        //slide.setFitsSystemWindows(true);
+        toggle = new ActionBarDrawerToggle(this,slide,R.string.open,R.string.close);
+        /*{
+            public void onDrawerOpened(View view)
+            {
+                super.onDrawerOpened(view);
+
+                Boolean Registered;
+                final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Menu.this);
+                Registered = sharedPref.getBoolean("Registered", false);
+                if (Registered == true)
+                {
+                    username.setText(sharedPref.getString("username",""));
+                }
+            }
+        };*/
+        slide.addDrawerListener(toggle);
+        toggle.syncState();
+
+        //navigation view in drawer layout
+        navigationView = findViewById(R.id.navView);
+        navigationView.setNavigationItemSelectedListener(this);
 
         //set the header programmatically
         //View headerLayout = navigationView.getHeaderView(R.layout.header_slide_navigation);  upper version
@@ -125,28 +146,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             user.setBackgroundResource(R.drawable.baseline_account_circle_black_48);
         }
 
-
-        //drawer layout
-        slide = findViewById(R.id.drawer);
-        //slide.setFitsSystemWindows(true);
-        toggle = new ActionBarDrawerToggle(this,slide,R.string.open,R.string.close);
-        /*{
-            public void onDrawerOpened(View view)
-            {
-                super.onDrawerOpened(view);
-
-                Boolean Registered;
-                final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Menu.this);
-                Registered = sharedPref.getBoolean("Registered", false);
-                if (Registered == true)
-                {
-                    username.setText(sharedPref.getString("username",""));
-                }
-            }
-        };*/
-        slide.addDrawerListener(toggle);
-        toggle.syncState();
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //show everything on action bar : TRUE or FALSE
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new Insert_bsl()).commit(); //when this layout appear, it will show insert bsl layout
         mainNav.setSelectedItemId(R.id.nav_insert_bsl);  //set the bottom navigation icon
@@ -168,6 +167,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         getSupportActionBar().setCustomView(textView);
     }*/
     //when click back button, it close the drawer layout
+
     @Override
     public void onBackPressed()
     {
@@ -342,10 +342,11 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                 });
 
         //show alert dialog box with changing title line separator colour
-        Dialog d = alertDialogBuilder.show();
+        alertDialogBuilder.show();
+        /*Dialog d = alertDialogBuilder.show();
         int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
         View divider = d.findViewById(dividerId);
-        divider.setBackgroundColor(getResources().getColor(R.color.redLight));
+        divider.setBackgroundColor(getResources().getColor(R.color.redLight));*/
 
         //show alert dialog box without changing the colour
         /*AlertDialog alertDialog = alertDialogBuilder.create();

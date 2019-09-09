@@ -16,6 +16,7 @@
         <item name="buttonStyle">@style/button</item>
         <item name="android:buttonStyle">@style/button</item>
 
+
         <!-- For the resting Spinner style -->
         <!--<item name="android:spinnerItemStyle">
             @style/spinnerItemStyle
@@ -57,6 +58,7 @@
     <style name="DialogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="android:textColor">@color/white</item>
         <item name="buttonStyle">@style/button</item>
+        <item name="colorPrimary">@color/redLight</item>
     </style>
 
     <style name="dialogDayNight" parent="Theme.AppCompat.DayNight">

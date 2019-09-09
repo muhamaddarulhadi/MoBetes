@@ -114,7 +114,8 @@ public class Insert_bsl extends Fragment
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                final DatePickerDialog datePickerDialog = new DatePickerDialog(Insert_bsl.this.getActivity(), R.style.DialogTheme ,new DatePickerDialog.OnDateSetListener()
+                //final DatePickerDialog datePickerDialog = new DatePickerDialog(Insert_bsl.this.getActivity(), R.style.DialogTheme ,new DatePickerDialog.OnDateSetListener()
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(Insert_bsl.this.getActivity() ,new DatePickerDialog.OnDateSetListener()
                 {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day)
@@ -154,8 +155,9 @@ public class Insert_bsl extends Fragment
                 int minute = calendar.get(Calendar.MINUTE);
                 final boolean is24HourView = false;
 
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Insert_bsl.this.getActivity() ,new TimePickerDialog.OnTimeSetListener()
                 //TimePickerDialog timePickerDialog = new TimePickerDialog(Insert_bsl.this.getActivity(),AlertDialog.THEME_DEVICE_DEFAULT_LIGHT ,new TimePickerDialog.OnTimeSetListener()
-                TimePickerDialog timePickerDialog = new TimePickerDialog(Insert_bsl.this.getActivity(), R.style.DialogTheme ,new TimePickerDialog.OnTimeSetListener()
+                //TimePickerDialog timePickerDialog = new TimePickerDialog(Insert_bsl.this.getActivity(), R.style.DialogTheme ,new TimePickerDialog.OnTimeSetListener()
                 {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)
@@ -251,7 +253,7 @@ public class Insert_bsl extends Fragment
                                     mild();
                                     type.setText("Mild (Low)");
                                 }
-                                else if (bsl_D >= 4.4 && bsl_D <= 5.6) //normal
+                                else if (bsl_D >= 4.0 && bsl_D <= 5.6) //normal  //must be 4.4
                                 {
                                     normal();
                                     type.setText("Normal");
@@ -259,12 +261,14 @@ public class Insert_bsl extends Fragment
                                 else if (bsl_D >= 5.7 && bsl_D <= 6.9) //prediabetic
                                 {
                                     prediabetic();
-                                    type.setText("Prediabetic (Slightly High)");
+                                    type.setText("Slightly High");
+                                    //type.setText("Prediabetic (Slightly High)");
                                 }
                                 else if (bsl_D >= 7.0) //diabetic
                                 {
                                     diabetic();
-                                    type.setText("Diabetic (High)");
+                                    type.setText("High");
+                                    //type.setText("Diabetic (High)");
                                 }
                             }
 
@@ -280,7 +284,7 @@ public class Insert_bsl extends Fragment
                                     mild();
                                     type.setText("Mild (Low)");
                                 }
-                                else if (bsl_D >= 4.4 && bsl_D <= 7.0) //normal
+                                else if (bsl_D >= 4.0 && bsl_D <= 7.0) //normal  //must be 4.4
                                 {
                                     normal();
                                     type.setText("Normal");
@@ -288,12 +292,14 @@ public class Insert_bsl extends Fragment
                                 else if (bsl_D >= 7.1 && bsl_D <= 10.9) //prediabetic
                                 {
                                     prediabetic();
-                                    type.setText("Prediabetic (Slightly High)");
+                                    type.setText("Slightly High");
+                                    //type.setText("Prediabetic (Slightly High)");
                                 }
                                 else if (bsl_D >= 11.0) //diabetic
                                 {
                                     diabetic();
-                                    type.setText("Diabetic (High)");
+                                    type.setText("High");
+                                    //type.setText("Diabetic (High)");
                                 }
                             }
 
@@ -413,11 +419,14 @@ public class Insert_bsl extends Fragment
                     }
                 });
 
+        alertDialogBuilder.show();
+
+        //for android kitkat/4 and below
         //show alert dialog box with changing title line separator colour
-        Dialog d = alertDialogBuilder.show();
+        /*Dialog d = alertDialogBuilder.show();
         int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
         View divider = d.findViewById(dividerId);
-        divider.setBackgroundColor(getResources().getColor(R.color.redLight));
+        divider.setBackgroundColor(getResources().getColor(R.color.redLight));*/
     }
 
     //alert dialog
@@ -436,11 +445,14 @@ public class Insert_bsl extends Fragment
                     }
                 });
 
+        alertDialogBuilder.show();
+
+        //for android kitkat/4 and below
         //show alert dialog box with changing title line separator colour
-        Dialog d = alertDialogBuilder.show();
+        /*Dialog d = alertDialogBuilder.show();
         int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
         View divider = d.findViewById(dividerId);
-        divider.setBackgroundColor(getResources().getColor(R.color.redLight));
+        divider.setBackgroundColor(getResources().getColor(R.color.redLight));*/
     }
 
     //alert dialog
@@ -459,11 +471,14 @@ public class Insert_bsl extends Fragment
                     }
                 });
 
+        alertDialogBuilder.show();
+
+        //for android kitkat/4 and below
         //show alert dialog box with changing title line separator colour
-        Dialog d = alertDialogBuilder.show();
+        /*Dialog d = alertDialogBuilder.show();
         int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
         View divider = d.findViewById(dividerId);
-        divider.setBackgroundColor(getResources().getColor(R.color.redLight));
+        divider.setBackgroundColor(getResources().getColor(R.color.redLight));*/
     }
 
     //alert dialog
@@ -482,11 +497,14 @@ public class Insert_bsl extends Fragment
                     }
                 });
 
+        alertDialogBuilder.show();
+
+        //for android kitkat/4 and below
         //show alert dialog box with changing title line separator colour
-        Dialog d = alertDialogBuilder.show();
+        /*Dialog d = alertDialogBuilder.show();
         int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
         View divider = d.findViewById(dividerId);
-        divider.setBackgroundColor(getResources().getColor(R.color.redLight));
+        divider.setBackgroundColor(getResources().getColor(R.color.redLight));*/
     }
 
     //alert dialog
@@ -505,11 +523,14 @@ public class Insert_bsl extends Fragment
                     }
                 });
 
+        alertDialogBuilder.show();
+
+        //for android kitkat/4 and below
         //show alert dialog box with changing title line separator colour
-        Dialog d = alertDialogBuilder.show();
+        /*Dialog d = alertDialogBuilder.show();
         int dividerId = d.getContext().getResources().getIdentifier("android:id/titleDivider", null, null);
         View divider = d.findViewById(dividerId);
-        divider.setBackgroundColor(getResources().getColor(R.color.redLight));
+        divider.setBackgroundColor(getResources().getColor(R.color.redLight));*/
     }
 
 

@@ -4,7 +4,7 @@
     <item
         android:id="@+id/nav_insert_bsl"
         android:icon="@drawable/outline_opacity_white_48"
-        android:title="Insert BSL" />
+        android:title="Blood Sugar" />
     <item
         android:id="@+id/nav_data"
         android:icon="@drawable/outline_assignment_white_48"

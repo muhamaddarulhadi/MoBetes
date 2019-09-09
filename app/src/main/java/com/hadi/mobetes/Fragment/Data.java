@@ -119,17 +119,33 @@ public class Data extends Fragment
                     String data = listView.getItemAtPosition(position).toString(); //get Data position on the list view
                     //Toast.makeText(Data.this.getActivity(), ""+data, Toast.LENGTH_LONG).show();  //test to view the Data array
                     String[] dataarray = data.split("\\s*,\\s*"); //split the Data to be multiline
-                    String data_time_temp = dataarray[0].replace("time=", ""); //remove the word in target
-                    String data_time = data_time_temp.replace("{", "");
-                    String data_bsl = dataarray[1].replace("bsl=", "");
-                    String data_condition = dataarray[2].replace("condition=", "");
+
+                    //for android lolipop/5 and above
+                    String data_id_temp = dataarray[0].replace("dataid=", "");
+                    String data_id = data_id_temp.replace("{", "");
+                    String data_time = dataarray[1].replace("time=", "");
+                    String data_date = dataarray[2].replace("date=", "");
                     String data_currentUser = dataarray[3].replace("currentuser=", "");
-                    String data_mood = dataarray[4].replace("mood=", "");
-                    String data_type = dataarray[5].replace("type=", "");
-                    String data_date = dataarray[6].replace("date=", "");
-                    String data_id = dataarray[7].replace("dataid=", "");
-                    String data_note_temp = dataarray[8].replace("note=", "");
-                    String data_note = data_note_temp.replace("}", "");
+                    String data_condition = dataarray[4].replace("condition=", "");
+                    String data_mood = dataarray[5].replace("mood=", "");
+                    String data_note = dataarray[6].replace("note=", "");
+                    String data_type = dataarray[7].replace("type=", "");
+                    String data_bsl_temp = dataarray[8].replace("bsl=", "");
+                    String data_bsl = data_bsl_temp.replace("}", "");
+
+
+                    //for android kitkat/4 and below
+                    //String data_time_temp = dataarray[0].replace("time=", ""); //remove the word in target
+                    //String data_time = data_time_temp.replace("{", "");
+                    //String data_bsl = dataarray[1].replace("bsl=", "");
+                    //String data_condition = dataarray[2].replace("condition=", "");
+                    //String data_currentUser = dataarray[3].replace("currentuser=", "");
+                    //String data_mood = dataarray[4].replace("mood=", "");
+                    //String data_type = dataarray[5].replace("type=", "");
+                    //String data_date = dataarray[6].replace("date=", "");
+                    //String data_id = dataarray[7].replace("dataid=", "");
+                    //String data_note_temp = dataarray[8].replace("note=", "");
+                    //String data_note = data_note_temp.replace("}", "");
 
                     loadDialogOpenData(data_id,data_bsl,data_condition,data_currentUser,data_mood,data_date,data_time,data_note,data_type);
                 }
@@ -186,17 +202,34 @@ public class Data extends Fragment
                         String data =  listView.getItemAtPosition(position).toString();
                         //Toast.makeText(Data.this.getActivity(), ""+Data, Toast.LENGTH_LONG).show();  //test to view the Data array
                         String[] dataarray = data.split("\\s*,\\s*");
-                        String data_time_temp = dataarray[0].replace("time=","");
-                        String data_time = data_time_temp.replace("{","");
-                        String data_bsl = dataarray[1].replace("bsl=","");
-                        String data_condition = dataarray[2].replace("condition=","");
+
+                        //for android lolipop/5 and above
+                        String data_id_temp = dataarray[0].replace("dataid=", "");
+                        String data_id = data_id_temp.replace("{", "");
+                        String data_time = dataarray[1].replace("time=", "");
+                        String data_date = dataarray[2].replace("date=", "");
                         String data_currentUser = dataarray[3].replace("currentuser=", "");
-                        String data_mood = dataarray[4].replace("mood=", "");
-                        String data_type = dataarray[5].replace("type=", "");
-                        String data_date = dataarray[6].replace("date=", "");
-                        String data_id = dataarray[7].replace("dataid=", "");
-                        String data_note_temp = dataarray[8].replace("note=", "");
-                        String data_note = data_note_temp.replace("}", "");
+                        String data_condition = dataarray[4].replace("condition=", "");
+                        String data_mood = dataarray[5].replace("mood=", "");
+                        String data_note = dataarray[6].replace("note=", "");
+                        String data_type = dataarray[7].replace("type=", "");
+                        String data_bsl_temp = dataarray[8].replace("bsl=", "");
+                        String data_bsl = data_bsl_temp.replace("}", "");
+
+
+                        //for android kitkat/4 and below
+                        //String data_time_temp = dataarray[0].replace("time=", ""); //remove the word in target
+                        //String data_time = data_time_temp.replace("{", "");
+                        //String data_bsl = dataarray[1].replace("bsl=", "");
+                        //String data_condition = dataarray[2].replace("condition=", "");
+                        //String data_currentUser = dataarray[3].replace("currentuser=", "");
+                        //String data_mood = dataarray[4].replace("mood=", "");
+                        //String data_type = dataarray[5].replace("type=", "");
+                        //String data_date = dataarray[6].replace("date=", "");
+                        //String data_id = dataarray[7].replace("dataid=", "");
+                        //String data_note_temp = dataarray[8].replace("note=", "");
+                        //String data_note = data_note_temp.replace("}", "");
+
                         //Toast.makeText(Data.this.getActivity(), ""+data_note, Toast.LENGTH_LONG).show();  //test to view Data
 
                         loadDialogUpdateData(data_id,data_bsl,data_condition,data_currentUser,data_mood,data_date,data_time,data_note,data_type);
@@ -209,10 +242,19 @@ public class Data extends Fragment
                         String data1 =  listView.getItemAtPosition(position).toString();
                         //Toast.makeText(Data.this.getActivity(), ""+data1, Toast.LENGTH_LONG).show();  //test to view the Data array
                         String[] dataarray1 = data1.split("\\s*,\\s*");  //split each item inside Data array by row
-                        String dataid1 = dataarray1[7].replace("dataid=","");  //set the location of the row
+
+
+                        //for android kitkat and below
+                        /*String dataid1 = dataarray1[7].replace("dataid=","");  //set the location of the row
                         //Toast.makeText(Data.this.getActivity(), "Data ID:"+dataid1, Toast.LENGTH_LONG).show();  //test to view the dataid
                         delete(dataid1);  //bottom sheet delete dialog
-                        //deletedataDialog(dataid1);  //NOT USE because this is the default dialog
+                        //deletedataDialog(dataid1);  //NOT USE because this is the default dialog*/
+
+
+                        //for android lolipop and above
+                        String data_id_temp1 = dataarray1[0].replace("dataid=", "");
+                        String data_id1 = data_id_temp1.replace("{", "");
+                        delete(data_id1);
 
                         break;
                 }
@@ -432,7 +474,7 @@ public class Data extends Fragment
                 int year = calendar.get(Calendar.YEAR);
                 int month = calendar.get(Calendar.MONTH);
                 int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(Data.this.getActivity(), R.style.DialogTheme ,new DatePickerDialog.OnDateSetListener()
+                DatePickerDialog datePickerDialog = new DatePickerDialog(Data.this.getActivity() ,new DatePickerDialog.OnDateSetListener()
                 {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day)
@@ -456,7 +498,7 @@ public class Data extends Fragment
                 int minute = calendar.get(Calendar.MINUTE);
                 final boolean is24HourView = false;
 
-                TimePickerDialog timePickerDialog = new TimePickerDialog(Data.this.getActivity(), R.style.DialogTheme ,new TimePickerDialog.OnTimeSetListener()
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Data.this.getActivity(),new TimePickerDialog.OnTimeSetListener()
                 {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)
