@@ -55,6 +55,7 @@ public class Register extends AppCompatActivity
 
         setContentView(R.layout.register);
         setTitle("Register");
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
 

@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.DividerItemDecoration;
 import android.text.Html;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -123,7 +124,6 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         View headerLayout = navigationView.inflateHeaderView(R.layout.header_slide_navigation);  //lower version
         username = headerLayout.findViewById(R.id.header_slide_navigation_username);
         userid = headerLayout.findViewById(R.id.header_slide_navigation_userId);
-        user = headerLayout.findViewById(R.id.header_slide_navigation_user);
 
         //get the username from shared preference for to set username on header layout
         SharedPreferences userLogin = getSharedPreferences(USERLOGIN,MODE_PRIVATE);
@@ -137,16 +137,17 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             username.setText(null);
         }
 
-        if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES)
+        /*if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES)
         {
             user.setBackgroundResource(R.drawable.baseline_account_circle_white_48);
         }
         else
         {
             user.setBackgroundResource(R.drawable.baseline_account_circle_black_48);
-        }
+        }*/
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //show everything on action bar : TRUE or FALSE
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
         getSupportFragmentManager().beginTransaction().replace(R.id.main_container, new Insert_bsl()).commit(); //when this layout appear, it will show insert bsl layout
         mainNav.setSelectedItemId(R.id.nav_insert_bsl);  //set the bottom navigation icon
     }

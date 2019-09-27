@@ -69,6 +69,7 @@ public class Login extends AppCompatActivity
 
         setContentView(R.layout.login);
         setTitle("Login");
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
 

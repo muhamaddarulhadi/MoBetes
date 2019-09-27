@@ -62,6 +62,7 @@ public class Feedback extends AppCompatActivity
 
         setContentView(R.layout.menu_feedback);
         setTitle("Feedback");
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
         //for x image on edittext
         final Drawable x = getResources().getDrawable(R.drawable.cancel);

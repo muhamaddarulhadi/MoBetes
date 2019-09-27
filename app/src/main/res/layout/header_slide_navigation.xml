@@ -15,31 +15,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/header_slide_navigation_user"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:clickable="true" />
+        <TextView
+            android:id="@+id/header_slide_navigation_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="45dp"
+            android:textSize="25sp" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView33"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/header_slide_navigation_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="45dp"
-                android:hint="Username"
-                android:textSize="25sp" />
-
-        </LinearLayout>
+            android:paddingLeft="10dp"
+            android:paddingBottom="20dp"
+            android:text="Diabetes monitor v1.0" />
 
     </LinearLayout>
 

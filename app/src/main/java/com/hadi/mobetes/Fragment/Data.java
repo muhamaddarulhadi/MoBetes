@@ -433,7 +433,7 @@ public class Data extends Fragment
         final TextView dataid_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_dataid);
         final EditText note_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_note);
         Button update_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_update_btn);
-        Button cancel_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_cancel_btn);
+        //Button cancel_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_cancel_btn);
 
         //set Data inside spinner to use the custom layout
         ArrayAdapter adapter1 = ArrayAdapter.createFromResource(this.getActivity(), R.array.condition, R.layout.spinner_item);
@@ -540,14 +540,14 @@ public class Data extends Fragment
         });
 
         //when click cancel button, it will close the custom dialog box
-        cancel_Dialog.setOnClickListener(new View.OnClickListener()
+        /*cancel_Dialog.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 aboutDialog.cancel();
             }
-        });
+        });*/
 
         //when click update button, it will update the Data
         update_Dialog.setOnClickListener(new View.OnClickListener()
@@ -557,15 +557,15 @@ public class Data extends Fragment
             {
                 try
                 {
-                    String currentUser_S = String.valueOf(currentUser_Dialog.getText().toString());
-                    String dataid_S = String.valueOf(dataid_Dialog.getText().toString());
+                    String currentUser_S = currentUser_Dialog.getText().toString();
+                    String dataid_S = dataid_Dialog.getText().toString();
                     double bsl_D = new Double (bsl_Dialog.getText().toString());
                     String bsl_D_S = String.valueOf(bsl_D);
-                    String condition_S = String.valueOf(condition_Dialog.getSelectedItem().toString());
-                    String mood_S = String.valueOf(mood_Dialog.getSelectedItem().toString());
-                    String date_S = String.valueOf(date_Dialog.getText().toString());
-                    String time_S = String.valueOf(time_Dialog.getText().toString());
-                    String note_S = String.valueOf(note_Dialog.getText().toString());
+                    String condition_S = condition_Dialog.getSelectedItem().toString();
+                    String mood_S = mood_Dialog.getSelectedItem().toString();
+                    String date_S = date_Dialog.getText().toString();
+                    String time_S = time_Dialog.getText().toString();
+                    String note_S = note_Dialog.getText().toString();
 
                     if (date_S.equals("") || time_S.equals("") || bsl_D == 0 || bsl_D_S.equals("") || bsl_D == 0.0)
                     {

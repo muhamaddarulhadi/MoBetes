@@ -34,6 +34,7 @@ public class Forgot_Password extends AppCompatActivity
         setTitle("Forgot Password");
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
 
     }

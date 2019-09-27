@@ -43,6 +43,7 @@ public class Symptoms extends AppCompatActivity
 
         setContentView(R.layout.symptoms);
         setTitle("Symptoms");
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
 

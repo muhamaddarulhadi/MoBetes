@@ -43,6 +43,7 @@ public class Treatments extends AppCompatActivity
 
         setContentView(R.layout.treatments);
         setTitle("Treatments");
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
 

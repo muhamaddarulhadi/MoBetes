@@ -45,6 +45,7 @@ public class Settings extends AppCompatActivity
         setTitle("Settings");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
         darkMode = findViewById(R.id.settings_darkMode_switch); //darkmode switch
 

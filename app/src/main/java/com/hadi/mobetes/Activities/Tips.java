@@ -43,6 +43,7 @@ public class Tips extends AppCompatActivity
 
         setContentView(R.layout.tips);
         setTitle("Tips");
+        getSupportActionBar().setElevation(0); //remove shadow under action bar
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
 
