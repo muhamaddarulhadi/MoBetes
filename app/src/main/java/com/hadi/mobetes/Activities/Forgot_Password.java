@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
@@ -37,12 +40,11 @@ public class Forgot_Password extends AppCompatActivity
     EditText email,username;
     Button send;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        //createdb();
+        createdb();
 
         //get DayNight mode from shared preference in InitApplication.java
         if (InitApplication.getInstance().isNightModeEnabled())
@@ -59,6 +61,13 @@ public class Forgot_Password extends AppCompatActivity
         setContentView(R.layout.forgot_password);
         setTitle("Forgot Password");
 
+        //permit all strict mode
+        /*if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }*/
+
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
         getSupportActionBar().setElevation(0); //remove shadow under action bar
 
@@ -71,15 +80,36 @@ public class Forgot_Password extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                //Toast.makeText(Forgot_Password.this, "Your email is "+email.getText(), Toast.LENGTH_SHORT).show();
+                //create new handler because if not it will make main class load to much work
+                //use looper for to make the toast process in background, appear in front of interface
+                new Handler(Looper.getMainLooper()).post(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        try
+                        {
+                            final String email_S = email.getText().toString();
+                            final String username_S = username.getText().toString();
 
-                //getPassword();
-
+                            if (email_S.equals("") || username_S.equals("")) //if the editText is empty
+                            {
+                                Toast.makeText(Forgot_Password.this, "Incorrect value", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                getPassword(); //call the method to get the password
+                                Toast.makeText(Forgot_Password.this, "Success sent password to email", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            Toast.makeText(Forgot_Password.this, "Failed sent password to email", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
-
-
-
     }
 
     //when the application is restart
@@ -104,15 +134,17 @@ public class Forgot_Password extends AppCompatActivity
         Intent login = new Intent(this, Login.class);
         login.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(login);
-
     }
 
-/*
+
+
+
     //CUSTOM METHOD
 
+    //set the mail server properties, use gmail.com
     public void setMailServerProperties()
     {
-        String emailPort = "587";//gmail's smtp port
+        String emailPort = "587"; //gmail's smtp port
 
         emailProperties = System.getProperties();
         emailProperties.put("mail.smtp.port", emailPort);
@@ -120,11 +152,12 @@ public class Forgot_Password extends AppCompatActivity
         emailProperties.put("mail.smtp.starttls.enable", "true");
     }
 
-    public void createEmailMessage(String password, String email ) throws AddressException, MessagingException
+    //create the email message that we want
+    public void createEmailMessage(String password, String email ) throws MessagingException
     {
         String[] toEmails = { email };
-        String emailSubject = "Your password from MoBetes application";
-        String emailBody = "Password : "+password;
+        String emailSubject = "Your password from MoBetes application"; //can put any email subject
+        String emailBody = "Password : "+password; //can put any email body
 
         mailSession = Session.getDefaultInstance(emailProperties, null);
         emailMessage = new MimeMessage(mailSession);
@@ -135,23 +168,25 @@ public class Forgot_Password extends AppCompatActivity
         }
 
         emailMessage.setSubject(emailSubject);
-        emailMessage.setContent(emailBody, "text/html");//for a html email
-        //emailMessage.setText(emailBody);// for a text email
+        emailMessage.setContent(emailBody, "text/html"); //for a html email
+        //emailMessage.setText(emailBody); // for a text email
     }
 
-    public void sendEmail() throws AddressException, MessagingException
+    //send email using this account
+    public void sendEmail() throws MessagingException
     {
-        String emailHost = "smtp.gmail.com";
-        String fromUser = "softwaretestingbyhadi";//just the id alone without @gmail.com
-        String fromUserEmailPassword = "hadisoftwaretesting";
+        String emailHost = "smtp.gmail.com"; //use gmail.com smtp
+        String fromUser = "YOUR EMAIL"; //just the id alone without @gmail.com //put your email //email used need to turn on Less secure app access
+        String fromUserEmailPassword = "YOUR PASSWORD"; //put your password
 
         Transport transport = mailSession.getTransport("smtp");
 
         transport.connect(emailHost, fromUser, fromUserEmailPassword);
         transport.sendMessage(emailMessage, emailMessage.getAllRecipients());
         transport.close();
-        System.out.println("Email sent successfully.");
+        System.out.println("Email sent successfully."); //just to show on debug process
     }
+
 
 
 
@@ -165,7 +200,7 @@ public class Forgot_Password extends AppCompatActivity
         user_db.execSQL(sqlcreate);
     }
 
-    //search registered user
+    //search registered user and get it password
     public void getPassword()
     {
         final String email_S = email.getText().toString();
@@ -173,6 +208,7 @@ public class Forgot_Password extends AppCompatActivity
 
         try
         {
+            //search the registered user
             String sqlsearch = "SELECT PASSWORD, EMAIL FROM USER WHERE USERNAME = '"+username_S+"' AND EMAIL = '"+email_S+"'";
             Cursor c = user_db.rawQuery(sqlsearch,null);
 
@@ -181,33 +217,42 @@ public class Forgot_Password extends AppCompatActivity
                 c.moveToFirst();
                 for (int i=0;i<c.getCount();i++)
                 {
-                    String password = c.getString(c.getColumnIndex("PASSWORD"));
-                    String email = c.getString(c.getColumnIndex("EMAIL"));
+                    final String password = c.getString(c.getColumnIndex("PASSWORD"));
+                    final String email = c.getString(c.getColumnIndex("EMAIL"));
 
-                    try
+                    //create new thread because to reduce workload on main class
+                    Thread thread = new Thread(new Runnable()
                     {
-                        setMailServerProperties();
-                        createEmailMessage(password,email);
-                        sendEmail();
-                    }
-                    catch (AddressException e)
-                    {
-                        Toast.makeText(Forgot_Password.this, "Uncorrect email", Toast.LENGTH_SHORT).show();
-                    }
-                    catch (MessagingException e)
-                    {
-                        Toast.makeText(Forgot_Password.this, "Failed to sent", Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void run()
+                        {
+                            try
+                            {
+                                //call the email method
+                                setMailServerProperties();
+                                createEmailMessage(password,email); //parsing the password and email found on this method
+                                sendEmail();
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                    thread.start();
+
+                    //Toast.makeText(this, "Your password "+password, Toast.LENGTH_SHORT).show();
                 }
             }
             else
             {
-                Toast.makeText(this, "Username and Email does not exist", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Username or Email does not exist", Toast.LENGTH_SHORT).show();
             }
         }
         catch (Exception e)
         {
             Log.e("DB",e.toString());
         }
-    }*/
+    }
 }
