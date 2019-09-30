@@ -115,7 +115,7 @@ public class Insert_bsl extends Fragment
                 int month = calendar.get(Calendar.MONTH);
                 int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
                 //final DatePickerDialog datePickerDialog = new DatePickerDialog(Insert_bsl.this.getActivity(), R.style.DialogTheme ,new DatePickerDialog.OnDateSetListener()
-                final DatePickerDialog datePickerDialog = new DatePickerDialog(Insert_bsl.this.getActivity() ,new DatePickerDialog.OnDateSetListener()
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(Insert_bsl.this.getActivity() , new DatePickerDialog.OnDateSetListener()
                 {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day)
@@ -219,22 +219,23 @@ public class Insert_bsl extends Fragment
             @Override
             public void onClick(View v)
             {
-                try
-                {
-                    String currentUser_S = String.valueOf(currentUser.getText().toString());
-                    double bsl_D = new Double (bsl.getText().toString());
-                    String bsl_D_S = String.valueOf(bsl_D);
-                    String condition_S = String.valueOf(condition.getSelectedItem().toString());
-                    String date_S = String.valueOf(date.getText().toString());
-                    String time_S = String.valueOf(time.getText().toString());
-                    TextView type = getActivity().findViewById(R.id.fragment_insert_bsl_type);
+                String currentUser_S = currentUser.getText().toString();
 
-                    if (currentUser_S.equals(""))
+                if (currentUser_S.equals(""))
+                {
+                    Toast.makeText(getActivity(), "Please login to add data", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    try
                     {
-                        Toast.makeText(getActivity(), "Please login to add data", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
+                        double bsl_D = new Double(bsl.getText().toString());
+                        String bsl_D_S = String.valueOf(bsl_D);
+                        String condition_S = condition.getSelectedItem().toString();
+                        String date_S = date.getText().toString();
+                        String time_S = time.getText().toString();
+                        TextView type = getActivity().findViewById(R.id.fragment_insert_bsl_type);
+
                         if (date_S.equals("") || time_S.equals("") || bsl_D == zero || bsl_D_S.equals(""))
                         {
                             Toast.makeText(getActivity(), "Incomplete Data", Toast.LENGTH_SHORT).show();
@@ -271,7 +272,6 @@ public class Insert_bsl extends Fragment
                                     //type.setText("Diabetic (High)");
                                 }
                             }
-
                             else if (condition_S.equals("2 hour after meal"))
                             {
                                 if (bsl_D < 3.0) //severe
@@ -306,14 +306,14 @@ public class Insert_bsl extends Fragment
                             savedata();
                         }
                     }
-                }
-                catch (NumberFormatException e)
-                {
-                    Toast.makeText(getActivity(), "BSL must be in correct value", Toast.LENGTH_SHORT).show();
-                }
-                catch (InputMismatchException e)
-                {
-                    Toast.makeText(getActivity(), "Insert correct value", Toast.LENGTH_SHORT).show();
+                    catch (NumberFormatException e)
+                    {
+                        Toast.makeText(getActivity(), "BSL is empty", Toast.LENGTH_SHORT).show();
+                    }
+                    catch (InputMismatchException e)
+                    {
+                        Toast.makeText(getActivity(), "Insert correct value", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
