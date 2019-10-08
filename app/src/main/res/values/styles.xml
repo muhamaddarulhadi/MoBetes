@@ -42,6 +42,8 @@
         <item name="buttonStyle">@style/button</item>
         <item name="android:buttonStyle">@style/button</item>
 
+        <!--<item name="android:actionBarStyle">@color/greyNight</item>-->
+
         <!-- For the resting Spinner style -->
         <!--<item name="android:spinnerItemStyle">
             @style/spinnerItemStyleDark
@@ -53,6 +55,7 @@
         </item>-->
 
     </style>
+
 
     <style name="DialogTheme" parent="Theme.Design.BottomSheetDialog">
         <item name="android:textColor">@color/white</item>
@@ -71,7 +74,7 @@
         <item name="android:actionBarWidgetTheme">@color/white</item>
     </style>
 
-    <style name="BottomNavigation" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="BottomNavigation" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/redLight</item>
         <item name="colorPrimaryDark">@color/redLight</item>
         <item name="colorAccent">@color/redLight</item>

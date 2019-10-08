@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
@@ -92,7 +93,8 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         mainNav = findViewById(R.id.bottom_navigation);
         mainNav.setOnNavigationItemSelectedListener(navListener);
         mainNav.setItemTextAppearanceActive(R.style.BottomNavigation);  //set the style when bottom navigation is active
-        //mainNav.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.redLight)));
+        //mainNav.setItemTextColor(ColorStateList.valueOf(getResources().getColor(R.color.redLight))); set all the text color
+
 
         //drawer layout
         slide = findViewById(R.id.drawer);
