@@ -325,7 +325,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     private void loadDialog()
     {
         String title = "About";
-        String ab = "This application is a project that are build by Hadi for Project 2 subject. The title for this application is MoBetes. Copyright 2019. ";
+        String ab = "This application is a project that are build by Hadi for Project 2 subject. \n\nThe application name is MoBetes. \n\nCopyright 2019. \n\nWarning! \nThis application is not suitable for pregnant lady";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 //.setTitle(title)

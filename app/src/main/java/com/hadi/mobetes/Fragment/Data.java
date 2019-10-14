@@ -41,6 +41,8 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.hadi.mobetes.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -121,17 +123,19 @@ public class Data extends Fragment
                     String[] dataarray = data.split("\\s*,\\s*"); //split the Data to be multiline
 
                     //for android lolipop/5 and above
-                    String data_id_temp = dataarray[0].replace("dataid=", "");
-                    String data_id = data_id_temp.replace("{", "");
-                    String data_time = dataarray[1].replace("time=", "");
-                    String data_date = dataarray[2].replace("date=", "");
-                    String data_currentUser = dataarray[3].replace("currentuser=", "");
-                    String data_condition = dataarray[4].replace("condition=", "");
-                    String data_mood = dataarray[5].replace("mood=", "");
-                    String data_note = dataarray[6].replace("note=", "");
-                    String data_type = dataarray[7].replace("type=", "");
-                    String data_bsl_temp = dataarray[8].replace("bsl=", "");
+                    String data_meal_temp = dataarray[0].replace("meal=","");
+                    String data_meal = data_meal_temp.replace("{","");
+                    String data_id = dataarray[1].replace("{", "");
+                    String data_time = dataarray[2].replace("time=", "");
+                    String data_date = dataarray[3].replace("date=", "");
+                    String data_currentUser = dataarray[4].replace("currentuser=", "");
+                    String data_condition = dataarray[5].replace("condition=", "");
+                    String data_mood = dataarray[6].replace("mood=", "");
+                    String data_note = dataarray[7].replace("note=", "");
+                    String data_type = dataarray[8].replace("type=", "");
+                    String data_bsl_temp = dataarray[9].replace("bsl=", "");
                     String data_bsl = data_bsl_temp.replace("}", "");
+
 
 
                     //for android kitkat/4 and below
@@ -147,7 +151,7 @@ public class Data extends Fragment
                     //String data_note_temp = dataarray[8].replace("note=", "");
                     //String data_note = data_note_temp.replace("}", "");
 
-                    loadDialogOpenData(data_id,data_bsl,data_condition,data_currentUser,data_mood,data_date,data_time,data_note,data_type);
+                    loadDialogOpenData(data_meal,data_id,data_time,data_date,data_currentUser,data_condition,data_mood,data_note,data_type,data_bsl);
                 }
                 catch (NullPointerException e)
                 {
@@ -199,22 +203,22 @@ public class Data extends Fragment
                 {
                     case 0:
 
-                        //when click update button is click, user can update the Data
-                        String data =  listView.getItemAtPosition(position).toString();
-                        //Toast.makeText(Data.this.getActivity(), ""+Data, Toast.LENGTH_LONG).show();  //test to view the Data array
-                        String[] dataarray = data.split("\\s*,\\s*");
+                        //when update button is click, user can update the Data
+                        String data = listView.getItemAtPosition(position).toString(); //get Data position on the list view
+                        String[] dataarray = data.split("\\s*,\\s*"); //split the Data to be multiline
 
                         //for android lolipop/5 and above
-                        String data_id_temp = dataarray[0].replace("dataid=", "");
-                        String data_id = data_id_temp.replace("{", "");
-                        String data_time = dataarray[1].replace("time=", "");
-                        String data_date = dataarray[2].replace("date=", "");
-                        String data_currentUser = dataarray[3].replace("currentuser=", "");
-                        String data_condition = dataarray[4].replace("condition=", "");
-                        String data_mood = dataarray[5].replace("mood=", "");
-                        String data_note = dataarray[6].replace("note=", "");
-                        String data_type = dataarray[7].replace("type=", "");
-                        String data_bsl_temp = dataarray[8].replace("bsl=", "");
+                        String data_meal_temp = dataarray[0].replace("meal=","");
+                        String data_meal = data_meal_temp.replace("{","");
+                        String data_id = dataarray[1].replace("dataid=", "");
+                        String data_time = dataarray[2].replace("time=", "");
+                        String data_date = dataarray[3].replace("date=", "");
+                        String data_currentUser = dataarray[4].replace("currentuser=", "");
+                        String data_condition = dataarray[5].replace("condition=", "");
+                        String data_mood = dataarray[6].replace("mood=", "");
+                        String data_note = dataarray[7].replace("note=", "");
+                        String data_type = dataarray[8].replace("type=", "");
+                        String data_bsl_temp = dataarray[9].replace("bsl=", "");
                         String data_bsl = data_bsl_temp.replace("}", "");
 
 
@@ -233,7 +237,7 @@ public class Data extends Fragment
 
                         //Toast.makeText(Data.this.getActivity(), ""+data_note, Toast.LENGTH_LONG).show();  //test to view Data
 
-                        loadDialogUpdateData(data_id,data_bsl,data_condition,data_currentUser,data_mood,data_date,data_time,data_note,data_type);
+                        loadDialogUpdateData(data_meal,data_id,data_bsl,data_condition,data_currentUser,data_mood,data_date,data_time,data_note,data_type);
 
                         break;
 
@@ -253,8 +257,7 @@ public class Data extends Fragment
 
 
                         //for android lolipop and above
-                        String data_id_temp1 = dataarray1[0].replace("dataid=", "");
-                        String data_id1 = data_id_temp1.replace("{", "");
+                        String data_id1 = dataarray1[1].replace("dataid=", "");
                         delete(data_id1);
 
                         break;
@@ -270,11 +273,11 @@ public class Data extends Fragment
 
     //SQLITE DATABASE
 
-    //create or open the database using sqllite
+    //create or open a database using sqllite
     public void createdb()
     {
         data_db = this.getActivity().openOrCreateDatabase("data_db",MODE_PRIVATE,null);
-        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
+        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
         data_db.execSQL(sqlcreate);
     }
 
@@ -282,8 +285,8 @@ public class Data extends Fragment
     public void loaddata()
     {
         final TextView currentUser = getActivity().findViewById(R.id.fragment_data_2_currentUser);
-        String currentUser_S = String.valueOf(currentUser.getText().toString());
-        String sqlsearch = "SELECT DATAID,CURRENTUSER, BSL, CONDITION, MOOD, DATE, TIME, NOTE, TYPE FROM DATA WHERE CURRENTUSER = '"+currentUser_S+"'";
+        String currentUser_S = currentUser.getText().toString();
+        String sqlsearch = "SELECT DATAID,CURRENTUSER, BSL, CONDITION, MEAL, MOOD, DATE, TIME, NOTE, TYPE FROM DATA WHERE CURRENTUSER = '"+currentUser_S+"'";
         Cursor c = data_db.rawQuery(sqlsearch,null);
         listdata.clear();
         if (c.getCount() > 0)
@@ -295,6 +298,7 @@ public class Data extends Fragment
                 String currentuser = c.getString(c.getColumnIndex("CURRENTUSER"));
                 String bsl = c.getString(c.getColumnIndex("BSL"));
                 String condition = c.getString(c.getColumnIndex("CONDITION"));
+                String meal = c.getString(c.getColumnIndex("MEAL"));
                 String mood = c.getString(c.getColumnIndex("MOOD"));
                 String date = c.getString(c.getColumnIndex("DATE"));
                 String time = c.getString(c.getColumnIndex("TIME"));
@@ -305,6 +309,7 @@ public class Data extends Fragment
                 datalist.put("currentuser",currentuser);
                 datalist.put("bsl",bsl);
                 datalist.put("condition",condition);
+                datalist.put("meal",meal);
                 datalist.put("mood",mood);
                 datalist.put("date",date);
                 datalist.put("time",time);
@@ -317,8 +322,8 @@ public class Data extends Fragment
                     Data.this.getActivity(), listdata,
                     //R.layout.custom_list_data, new  //NOT USE
                     R.layout.custom_list_data_2, new
-                    String[]{"dataid","currentuser","bsl","condition","mood","date","time","note","type"}, new
-                    int[]{R.id.custom_list_data_id,R.id.custom_list_data_currentUser,R.id.custom_list_data_bsl,R.id.custom_list_data_condition,R.id.custom_list_data_mood,
+                    String[]{"dataid","currentuser","bsl","condition","meal","mood","date","time","note","type"}, new
+                    int[]{R.id.custom_list_data_id,R.id.custom_list_data_currentUser,R.id.custom_list_data_bsl,R.id.custom_list_data_condition,R.id.custom_list_data_meal,R.id.custom_list_data_mood,
                     R.id.custom_list_data_date,R.id.custom_list_data_time,R.id.custom_list_data_note,R.id.custom_list_data_type});
             //lvdata.setAdapter(adapter);  //NOT USE
             listView.setAdapter(adapter);
@@ -394,7 +399,7 @@ public class Data extends Fragment
     }*/
 
     //load dialog to update Data
-    private void loadDialogUpdateData(final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
+    private void loadDialogUpdateData(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
     {
         final Dialog aboutDialog = new Dialog(this.getActivity(), R.style.dialog);
         aboutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -424,6 +429,7 @@ public class Data extends Fragment
         aboutDialog.show();
 
         //for custom dialog box, must put aboutDialog.findViewById(), not getActivity().findViewById()
+        final Spinner meal_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_meal_spinner);
         final EditText time_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_time);
         final EditText bsl_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_bsl);
         final Spinner condition_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_condition_spinner);
@@ -441,6 +447,28 @@ public class Data extends Fragment
         condition_Dialog.setAdapter(adapter1);
         ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(), R.array.mood, R.layout.spinner_item);
         mood_Dialog.setAdapter(adapter2);
+        ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this.getActivity(), R.array.meal, R.layout.spinner_item);
+        meal_Dialog.setAdapter(adapter3);
+
+        //if the condition is fasting, it will disable meal
+        condition_Dialog.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id)
+            {
+                if (position == 0)
+                {
+                    meal_Dialog.setEnabled(false);
+                }
+                else
+                {
+                    meal_Dialog.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) { }
+        });
 
         //set Data get from touch list view
         dataid_Dialog.setText(dataid);
@@ -462,6 +490,13 @@ public class Data extends Fragment
             if(mood_Dialog.getItemAtPosition(u).equals(mood))
             {
                 mood_Dialog.setSelection(u);
+            }
+        }
+        for (int c=0; c< meal_Dialog.getCount();c++)
+        {
+            if(meal_Dialog.getItemAtPosition(c).equals(meal))
+            {
+                meal_Dialog.setSelection(c);
             }
         }
 
@@ -563,6 +598,7 @@ public class Data extends Fragment
                     double bsl_D = new Double (bsl_Dialog.getText().toString());
                     String bsl_D_S = String.valueOf(bsl_D);
                     String condition_S = condition_Dialog.getSelectedItem().toString();
+                    String meal_S = meal_Dialog.getSelectedItem().toString();
                     String mood_S = mood_Dialog.getSelectedItem().toString();
                     String date_S = date_Dialog.getText().toString();
                     String time_S = time_Dialog.getText().toString();
@@ -584,17 +620,17 @@ public class Data extends Fragment
                             {
                                 type_Dialog.setText("Mild (Low)");
                             }
-                            else if (bsl_D >= 4.4 && bsl_D <= 5.6) //normal
+                            else if (bsl_D >= 4.0 && bsl_D <= 6.0) //normal
                             {
                                 type_Dialog.setText("Normal");
                             }
-                            else if (bsl_D >= 5.7 && bsl_D <= 6.9) //prediabetic
+                            else if (bsl_D >= 6.1 && bsl_D <= 6.9) //prediabetic
                             {
-                                type_Dialog.setText("Prediabetic (Slightly High)");
+                                type_Dialog.setText("Slightly High");
                             }
                             else if (bsl_D >= 7.0) //diabetic
                             {
-                                type_Dialog.setText("Diabetic (High)");
+                                type_Dialog.setText("High");
                             }
                         }
 
@@ -608,24 +644,48 @@ public class Data extends Fragment
                             {
                                 type_Dialog.setText("Mild (Low)");
                             }
-                            else if (bsl_D >= 4.4 && bsl_D <= 7.0) //normal
+                            else if (bsl_D >= 4.0 && bsl_D <= 7.7) //normal
                             {
                                 type_Dialog.setText("Normal");
                             }
-                            else if (bsl_D >= 7.1 && bsl_D <= 10.9) //prediabetic
+                            else if (bsl_D >= 7.8 && bsl_D <= 11.0) //prediabetic
                             {
-                                type_Dialog.setText("Prediabetic (Slightly High)");
+                                type_Dialog.setText("Slightly High");
                             }
-                            else if (bsl_D >= 11.0) //diabetic
+                            else if (bsl_D >= 11.1) //diabetic
                             {
-                                type_Dialog.setText("Diabetic (High)");
+                                type_Dialog.setText("High");
                             }
                         }
 
-                        String type_S = String.valueOf(type_Dialog.getText().toString());
+                        else if (condition_S.equals("Before meal"))
+                        {
+                            if (bsl_D < 3.0) //severe
+                            {
+                                type_Dialog.setText("Severe (Low)");
+                            }
+                            else if (bsl_D >= 3.0 && bsl_D <= 3.9) //mild
+                            {
+                                type_Dialog.setText("Mild (Low)");
+                            }
+                            else if (bsl_D >= 4.0 && bsl_D <= 6.0) //normal  //must be 4.4
+                            {
+                                type_Dialog.setText("Normal");
+                            }
+                            else if (bsl_D >= 6.1 && bsl_D <= 6.9) //prediabetic
+                            {
+                                type_Dialog.setText("Slightly High");
+                            }
+                            else if (bsl_D >= 7.0) //diabetic
+                            {
+                                type_Dialog.setText("High");
+                            }
+                        }
+
+                        String type_S = type_Dialog.getText().toString();
 
                         //loadDialogUpdateDataConfirm(dataid_S,bsl_D_S,condition_S,mood_S,date_S,time_S,note_S,type_S);  //NOT USE, default dialog
-                        update(dataid_S,bsl_D_S,condition_S,currentUser_S,mood_S,date_S,time_S,note_S,type_S);  //bottom sheet update dialog
+                        update(meal_S,dataid_S,bsl_D_S,condition_S,currentUser_S,mood_S,date_S,time_S,note_S,type_S);  //bottom sheet update dialog
                     }
                 }
                 catch (NumberFormatException e)
@@ -719,8 +779,10 @@ public class Data extends Fragment
 
     }
 
+
+
     //load dialog to open Data just for view
-    private void loadDialogOpenData(final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
+    private void loadDialogOpenData(final String meal, final String dataid, final String time, final String date, final String currentUser, final String condition, final String mood, final String note, final String type, final String bsl)
     {
         final Dialog aboutDialog = new Dialog(this.getActivity(), R.style.dialog);
         aboutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -748,6 +810,7 @@ public class Data extends Fragment
         //for custom dialog box, must put aboutDialog.findViewById(), not getActivity().findViewById()
         final TextView time_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_time);
         final TextView bsl_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_bsl);
+        final TextView meal_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_meal);
         final TextView condition_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_condition);
         final TextView currentUser_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_currentUser);
         final TextView mood_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_mood);
@@ -759,6 +822,7 @@ public class Data extends Fragment
 
         dataid_Dialog.setText(dataid);
         bsl_Dialog.setText(bsl);
+        meal_Dialog.setText(meal);
         date_Dialog.setText(date);
         time_Dialog.setText(time);
         note_Dialog.setText(note);
@@ -807,7 +871,7 @@ public class Data extends Fragment
     }*/
 
     //confirmation Bottom dialog to update data
-    private void update(final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
+    private void update(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
     {
         final BottomSheetDialog bottomSheetUpdate = new BottomSheetDialog(this.getActivity());
         //View sheetView = getActivity().getLayoutInflater().inflate(R.layout.custom_bottom_dialog_update_data, null);
@@ -822,11 +886,23 @@ public class Data extends Fragment
             @Override
             public void onClick(View v)
             {
-                String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MOOD = '"+mood+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
-                data_db.execSQL(sqlupdate);
-                loaddata();
-                Toast.makeText(getActivity(), "Success update Data", Toast.LENGTH_SHORT).show();
-                bottomSheetUpdate.cancel();
+                if (condition.equals("Fasting"))
+                {
+                    String meal1 = "";
+                    String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal1+"', MOOD = '"+mood+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
+                    data_db.execSQL(sqlupdate);
+                    loaddata();
+                    Toast.makeText(getActivity(), "Success update Data", Toast.LENGTH_SHORT).show();
+                    bottomSheetUpdate.cancel();
+                }
+                else
+                {
+                    String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal+"', MOOD = '"+mood+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
+                    data_db.execSQL(sqlupdate);
+                    loaddata();
+                    Toast.makeText(getActivity(), "Success update Data", Toast.LENGTH_SHORT).show();
+                    bottomSheetUpdate.cancel();
+                }
             }
         });
 

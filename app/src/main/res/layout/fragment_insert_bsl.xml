@@ -221,8 +221,9 @@
             android:layout_height="wrap_content"
             android:gravity="bottom"
             android:orientation="horizontal"
-            android:paddingLeft="17dp"
-            android:paddingRight="17dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp">
 
             <!--<Button
                 android:id="@+id/fragment_insert_bsl_reset_btn"
@@ -237,7 +238,7 @@
             <Button
                 android:id="@+id/fragment_insert_bsl_add_btn"
                 style="@style/button"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="10dp"

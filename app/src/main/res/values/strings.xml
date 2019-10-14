@@ -6,6 +6,7 @@
     <string-array name="condition">
         <item>Fasting</item>
         <item>2 hour after meal</item>
+        <item>Before meal</item>
 
         <!--<item>HbA1c</item>-->
         <!--<item>Random</item>-->

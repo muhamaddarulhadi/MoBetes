@@ -138,6 +138,11 @@ public class Insert_bsl extends Fragment
                     meal.setEnabled(true);
                     meal.setSelection(0);
                 }
+                else if (position == 2)
+                {
+                    meal.setEnabled(true);
+                    meal.setSelection(0);
+                }
             }
 
             @Override
@@ -298,12 +303,12 @@ public class Insert_bsl extends Fragment
                                     mild();
                                     type.setText("Mild (Low)");
                                 }
-                                else if (bsl_D >= 4.0 && bsl_D <= 5.6) //normal  //must be 4.4
+                                else if (bsl_D >= 4.0 && bsl_D <= 6.0) //normal  //must be 4.4
                                 {
                                     normal();
                                     type.setText("Normal");
                                 }
-                                else if (bsl_D >= 5.7 && bsl_D <= 6.9) //prediabetic
+                                else if (bsl_D >= 6.1 && bsl_D <= 6.9) //prediabetic
                                 {
                                     prediabetic();
                                     type.setText("Slightly High");
@@ -328,22 +333,50 @@ public class Insert_bsl extends Fragment
                                     mild();
                                     type.setText("Mild (Low)");
                                 }
-                                else if (bsl_D >= 4.0 && bsl_D <= 7.0) //normal  //must be 4.4
+                                else if (bsl_D >= 4.0 && bsl_D <= 7.7) //normal
                                 {
                                     normal();
                                     type.setText("Normal");
                                 }
-                                else if (bsl_D >= 7.1 && bsl_D <= 10.9) //prediabetic
+                                else if (bsl_D >= 7.8 && bsl_D <= 11.0) //prediabetic
                                 {
                                     prediabetic();
                                     type.setText("Slightly High");
                                     //type.setText("Prediabetic (Slightly High)");
                                 }
-                                else if (bsl_D >= 11.0) //diabetic
+                                else if (bsl_D >= 11.1) //diabetic
                                 {
                                     diabetic();
                                     type.setText("High");
                                     //type.setText("Diabetic (High)");
+                                }
+                            }
+                            else if (condition_S.equals("Before meal"))
+                            {
+                                if (bsl_D < 3.0) //severe
+                                {
+                                    severe();
+                                    type.setText("Severe (Low)");
+                                }
+                                else if (bsl_D >= 3.0 && bsl_D <= 3.9) //mild
+                                {
+                                    mild();
+                                    type.setText("Mild (Low)");
+                                }
+                                else if (bsl_D >= 4.0 && bsl_D <= 6.0) //normal  //must be 4.4
+                                {
+                                    normal();
+                                    type.setText("Normal");
+                                }
+                                else if (bsl_D >= 6.1 && bsl_D <= 6.9) //prediabetic
+                                {
+                                    prediabetic();
+                                    type.setText("Slightly High");
+                                }
+                                else if (bsl_D >= 7.0) //diabetic
+                                {
+                                    diabetic();
+                                    type.setText("High");
                                 }
                             }
 
@@ -455,7 +488,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar level is too mild (Low), take appropriate action to increase your blood sugar level";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#ECA913'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -481,7 +514,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar level is too severe (Low), send to hospital as soon as possible";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#FB4748'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -507,7 +540,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar level is normal";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#2C5F2D'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -533,7 +566,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar is slightly high, take appropriate action to decrease your blood sugar level";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#ECA913'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -559,7 +592,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar is too high, take appropriate action to decrease your blood sugar level";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#FB4748'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -587,7 +620,7 @@ public class Insert_bsl extends Fragment
     public void createdb()
     {
         data_db = this.getActivity().openOrCreateDatabase("data_db",MODE_PRIVATE,null);
-        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
+        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
         data_db.execSQL(sqlcreate);
     }
 
@@ -596,6 +629,7 @@ public class Insert_bsl extends Fragment
     {
         final EditText bsl = getActivity().findViewById(R.id.fragment_insert_bsl_bsl);
         final Spinner condition = getActivity().findViewById(R.id.fragment_insert_bsl_condition_spinner);
+        final Spinner meal = getActivity().findViewById(R.id.fragment_insert_bsl_meal_spinner);
         final Spinner mood = getActivity().findViewById(R.id.fragment_insert_bsl_mood_spinner);
         final EditText date = getActivity().findViewById(R.id.fragment_insert_bsl_date);
         final EditText time = getActivity().findViewById(R.id.fragment_insert_bsl_time);
@@ -605,6 +639,7 @@ public class Insert_bsl extends Fragment
 
         double bsl1 = Double.parseDouble(bsl.getText().toString());
         String condition1 = condition.getSelectedItem().toString();
+        String meal1 = meal.getSelectedItem().toString();
         String mood1 = mood.getSelectedItem().toString();
         String date1 = date.getText().toString();
         String time1 = time.getText().toString();
@@ -614,9 +649,19 @@ public class Insert_bsl extends Fragment
 
         try
         {
-            String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MOOD,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+mood1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
-            data_db.execSQL(sqlsave);
-            Toast.makeText(this.getActivity(), "Success add BSL", Toast.LENGTH_SHORT).show();
+            if (condition1.equals("Fasting"))
+            {
+                String meal2 = "";
+                String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,MOOD,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal2+"','"+mood1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
+                data_db.execSQL(sqlsave);
+                Toast.makeText(this.getActivity(), "Success add BSL", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,MOOD,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal1+"','"+mood1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
+                data_db.execSQL(sqlsave);
+                Toast.makeText(this.getActivity(), "Success add BSL", Toast.LENGTH_SHORT).show();
+            }
         }
         catch (Exception e)
         {
@@ -624,19 +669,4 @@ public class Insert_bsl extends Fragment
             Log.e("DB",e.toString());
         }
     }
-
-
-
-
-    //REVISION CODE
-
-    /*public void Data()
-    {
-        String bsl = getActivity().findViewById(R.id.fragment_insert_bsl_bsl).toString();
-        String condition = getActivity().findViewById(R.id.fragment_insert_bsl_condition_spinner).toString();
-        String mood = getActivity().findViewById(R.id.fragment_insert_bsl_mood_spinner).toString();
-        String date = getActivity().findViewById(R.id.fragment_insert_bsl_date).toString();
-        String time = getActivity().findViewById(R.id.fragment_insert_bsl_time).toString();
-        String note = getActivity().findViewById(R.id.fragment_insert_bsl_note).toString();
-    }*/
 }
