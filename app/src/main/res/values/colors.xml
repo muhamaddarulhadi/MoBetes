@@ -15,5 +15,9 @@
     <color name="greylight">#212121</color>
     <color name="greyNight">#303030</color>
     <color name="green">#33FF00</color>
+    <color name="twittercolor">#1DA1F2</color>
+    <color name="facebookcolor">#4267B2</color>
+    <color name="green2">#2C5F2D</color>
+    <color name="yellow">#FEE715</color>
 
 </resources>

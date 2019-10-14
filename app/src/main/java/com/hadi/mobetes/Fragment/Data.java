@@ -175,7 +175,8 @@ public class Data extends Fragment
 
                 //when swipe, show the delete button
                 SwipeMenuItem deleteItem = new SwipeMenuItem(getActivity().getApplicationContext());
-                deleteItem.setBackground(new ColorDrawable(Color.rgb(251,71,72)));
+                //deleteItem.setBackground(new ColorDrawable(Color.rgb(251,71,72)));
+                deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.facebookcolor)));
                 deleteItem.setWidth(170);
                 deleteItem.setTitle("Delete");
                 deleteItem.setTitleSize(15);

@@ -1,26 +1,21 @@
 package com.hadi.mobetes.Activities;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.SnackbarContentLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.DividerItemDecoration;
 import android.text.Html;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -37,8 +32,6 @@ import com.hadi.mobetes.Fragment.Reminder;
 import com.hadi.mobetes.SharedPreferences.InitApplication;
 import com.hadi.mobetes.R;
 
-import org.w3c.dom.Text;
-
 
 public class Menu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -53,11 +46,11 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     public static final String USERLOGIN = "USERLOGIN";
     Boolean Registered;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
         createdb();
 
         //get DayNight mode from shared preference in InitApplication.java
@@ -70,6 +63,9 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             setTheme(R.style.AppTheme);
+
+            //getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#1DA1F2\">" + getString(R.string.app_name) + "</font>"));
+            //getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.white)));
         }
 
         //set layout theme, must be put on top create

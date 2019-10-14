@@ -6,8 +6,16 @@
     <string-array name="condition">
         <item>Fasting</item>
         <item>2 hour after meal</item>
+
         <!--<item>HbA1c</item>-->
         <!--<item>Random</item>-->
+    </string-array>
+
+
+    <string-array name="meal">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
     </string-array>
 
     <string-array name="mood">

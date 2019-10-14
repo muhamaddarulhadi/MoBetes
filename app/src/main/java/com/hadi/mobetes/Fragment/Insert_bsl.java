@@ -3,14 +3,12 @@ package com.hadi.mobetes.Fragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.Html;
@@ -20,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,7 +28,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.hadi.mobetes.Activities.Menu;
 import com.hadi.mobetes.R;
 
 import java.util.Calendar;
@@ -69,6 +67,24 @@ public class Insert_bsl extends Fragment
     {
         super.onActivityCreated(savedInstanceState);
 
+       /* View someView = getActivity().findViewById(R.id.insertBSLback);
+        View root = someView.getRootView();
+
+        //get DayNight mode from shared preference in InitApplication.java
+        if (InitApplication.getInstance().isNightModeEnabled())
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+            root.setBackgroundColor(getResources().getColor(R.color.greyNight));
+        }
+        else
+        {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+;
+            root.setBackgroundColor(getResources().getColor(R.color.white));
+        }*/
+
+
         //for x image on edittext
         final Drawable x = getResources().getDrawable(R.drawable.cancel);
         x.setBounds(0, 0, x.getIntrinsicWidth(), x.getIntrinsicHeight());
@@ -100,6 +116,34 @@ public class Insert_bsl extends Fragment
         //set the spinner to use the setting on the spinner_item layout
         ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(), R.array.mood, R.layout.spinner_item);
         mood.setAdapter(adapter2);
+
+        final Spinner meal = getActivity().findViewById(R.id.fragment_insert_bsl_meal_spinner);
+        //set the spinner to use the setting on the spinner_item layout
+        ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this.getActivity(), R.array.meal, R.layout.spinner_item);
+        meal.setAdapter(adapter3);
+
+        //if the condition is fasting, it will disable meal
+        condition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id)
+            {
+                if (position == 0)
+                {
+                    meal.setEnabled(false);
+                    meal.setSelection(0);
+                }
+                else if (position == 1)
+                {
+                    meal.setEnabled(true);
+                    meal.setSelection(0);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) { }
+        });
+
 
         final EditText note = getActivity().findViewById(R.id.fragment_insert_bsl_note);
 
@@ -401,6 +445,7 @@ public class Insert_bsl extends Fragment
 
 
 
+
     //CUSTOM METHOD
 
     //alert dialog
@@ -410,7 +455,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar level is too mild (Low), take appropriate action to increase your blood sugar level";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#FB4748'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -436,7 +481,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar level is too severe (Low), send to hospital as soon as possible";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#FB4748'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -462,7 +507,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar level is normal";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#FB4748'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -488,7 +533,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar is slightly high, take appropriate action to decrease your blood sugar level";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#FB4748'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
@@ -514,7 +559,7 @@ public class Insert_bsl extends Fragment
         String ab = "Your blood sugar is too high, take appropriate action to decrease your blood sugar level";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this.getActivity());
         alertDialogBuilder
-                .setTitle(Html.fromHtml("<font color='#FB4748'>"+title+"</font>"))
+                .setTitle(Html.fromHtml("<font color='#4267B2'>"+title+"</font>"))
                 .setMessage(ab)
                 .setCancelable(false)
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
