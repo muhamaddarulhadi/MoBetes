@@ -915,22 +915,4 @@ public class Data extends Fragment
             }
         });
     }
-
-
-
-
-    //REVISION CODE
-
-    /*
-    kedudukan dataaray
-
-    0 = time
-    1 = bsl
-    2 = condition
-    3 = mood
-    4 = type
-    5 = date
-    6 = dataid
-    7 = note
-    */
 }

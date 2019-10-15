@@ -32,7 +32,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            app:srcCompat="@mipmap/logo_without_background_foreground"
+            app:srcCompat="@drawable/diabetes_logo"
             tools:layout_editor_absoluteX="132dp"
             tools:layout_editor_absoluteY="295dp" />
 
