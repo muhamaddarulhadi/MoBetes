@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.hadi.mobetes.R;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -66,6 +67,25 @@ public class Insert_bsl extends Fragment
         super.onStart();
         //setHasOptionsMenu(true); //show the 3 dot menu //not use because already put on Menu.java
         createdb(); //calling the method to create or open the database
+
+        //get the current date and time
+        Calendar calender = Calendar.getInstance();
+        int time_get = calender.get(Calendar.HOUR_OF_DAY);
+        int date_get = calender.get(Calendar.DATE);
+        int am_pm = calender.get(Calendar.AM_PM);
+
+        //convert to date and time to string
+        String times = String.valueOf(time_get);
+        String dates = String.valueOf(date_get);
+        String am_pm_s = String.valueOf(am_pm);
+
+        //put the text on textview
+        final TextView time = getActivity().findViewById(R.id.fragment_insert_bsl_time);
+        final TextView date = getActivity().findViewById(R.id.fragment_insert_bsl_date);
+        time.setText(times+ " " +am_pm_s);
+        date.setText(dates);
+
+
     }
 
     //what the application do when the fragment is use
