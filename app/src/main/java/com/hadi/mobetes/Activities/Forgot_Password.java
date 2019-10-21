@@ -99,7 +99,6 @@ public class Forgot_Password extends AppCompatActivity
                             else
                             {
                                 getPassword(); //call the method to get the password
-                                Toast.makeText(Forgot_Password.this, "Success sent password to email", Toast.LENGTH_SHORT).show();
                             }
                         }
                         catch (Exception e)
@@ -177,7 +176,7 @@ public class Forgot_Password extends AppCompatActivity
     {
         String emailHost = "smtp.gmail.com"; //use gmail.com smtp
         String fromUser = "YOUR EMAIL"; //just the id alone without @gmail.com //put your email //email used need to turn on Less secure app access
-        String fromUserEmailPassword = "YOUR PASSWORD"; //put your password
+        String fromUserEmailPassword = "YOUR EMAIL PASSWORD"; //put your password
 
         Transport transport = mailSession.getTransport("smtp");
 
@@ -232,6 +231,7 @@ public class Forgot_Password extends AppCompatActivity
                                 setMailServerProperties();
                                 createEmailMessage(password,email); //parsing the password and email found on this method
                                 sendEmail();
+                                Toast.makeText(Forgot_Password.this, "Success sent password to email", Toast.LENGTH_SHORT).show();
                             }
                             catch (Exception e)
                             {
