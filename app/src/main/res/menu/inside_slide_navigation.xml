@@ -5,7 +5,17 @@
         android:id="@+id/account"
         android:icon="@drawable/person_black"
         android:title="Account" />
+
     <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="Settings" />
+    <item
+        android:id="@+id/github"
+        android:icon="@drawable/github"
+        android:title="Github" />
+
+    <!--<item
         android:id="@+id/symptoms"
         android:icon="@drawable/symptom"
         android:title="Symptoms" />
@@ -16,9 +26,9 @@
     <item
         android:id="@+id/tips"
         android:icon="@drawable/tips"
-        android:title="Tips" />
+        android:title="Tips" /> -->
 
-    <item android:title="Other">
+    <!--<item android:title="Other">
         <menu>
             <item
                 android:id="@+id/settings"
@@ -29,5 +39,5 @@
                 android:icon="@drawable/github"
                 android:title="Github" />
         </menu>
-    </item>
+    </item> -->
 </menu>

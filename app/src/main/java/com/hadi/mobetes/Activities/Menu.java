@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hadi.mobetes.SharedPreferences.AppEula;
 import com.hadi.mobetes.Fragment.Chart;
@@ -205,9 +206,9 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                 case R.id.nav_chart:
                     selectedFragment = new Chart();
                     break;
-                case R.id.nav_reminder:
+                /*case R.id.nav_reminder:
                     selectedFragment = new Reminder();
-                    break;
+                    break;*/
             }
 
             getSupportFragmentManager().beginTransaction().replace(R.id.main_container, selectedFragment).commit(); //show the fragment
@@ -286,7 +287,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
                 }
                 break;
 
-            case R.id.symptoms:
+           /*case R.id.symptoms:
                 Intent symptoms = new Intent (this, Symptoms.class);
                 startActivity(symptoms);
                 break;
@@ -299,7 +300,7 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.tips:
                 Intent tips = new Intent (this, Tips.class);
                 startActivity(tips);
-                break;
+                break; */
 
             case R.id.settings:
                 Intent setting = new Intent (this, Settings.class);
@@ -324,8 +325,8 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
     //show about dialog by clicking the triple dot menu
     private void loadDialog()
     {
-        String title = "About";
-        String ab = "This application is a project that are build by Hadi for Project 2 subject. \n\nThe application name is MoBetes. \n\nCopyright 2019. \n\nWarning! \nThis application is not suitable for pregnant lady";
+        String title = "Warning !";
+        String ab = "This application is not suitable for pregnant lady.";
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder
                 //.setTitle(title)
@@ -390,8 +391,18 @@ public class Menu extends AppCompatActivity implements NavigationView.OnNavigati
         bottomSheetDelete.setContentView(R.layout.custom_bottom_dialog_logout);
         bottomSheetDelete.show();
 
+        Button viewProfile = bottomSheetDelete.findViewById(R.id.custom_bottom_dialog_logout_view_profile_btn);
         Button logout = bottomSheetDelete.findViewById(R.id.custom_bottom_dialog_logout_logout_btn);
         Button cancel = bottomSheetDelete.findViewById(R.id.custom_bottom_dialog_logout_cancel_btn);
+
+        viewProfile.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Toast.makeText(Menu.this, "Not implement yet", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         logout.setOnClickListener(new View.OnClickListener()
         {

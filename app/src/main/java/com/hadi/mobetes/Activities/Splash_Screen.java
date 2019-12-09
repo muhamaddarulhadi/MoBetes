@@ -19,7 +19,7 @@ public class Splash_Screen extends AppCompatActivity
 {
 
     ImageView logo;
-    private static int SPLASH_TIME_OUT = 3000; //asal 3000, nanti ubah balik yang nih
+    private static int SPLASH_TIME_OUT = 2000; //asal 3000, nanti ubah balik yang nih
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

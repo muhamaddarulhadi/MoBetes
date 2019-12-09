@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/item3"
-        android:title="About"
+        android:title="Warning"
         app:showAsAction="never" />
 
 </menu>

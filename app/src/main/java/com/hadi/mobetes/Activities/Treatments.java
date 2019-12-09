@@ -47,7 +47,7 @@ public class Treatments extends AppCompatActivity
 
         currentDayNight = AppCompatDelegate.getDefaultNightMode(); //get the darkmode setting
 
-        treatments = findViewById(R.id.treatmens);
+        //treatments = findViewById(R.id.treatmens);
     }
 
     //when the application is restart

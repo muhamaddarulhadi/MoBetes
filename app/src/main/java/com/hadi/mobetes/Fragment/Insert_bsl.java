@@ -35,6 +35,8 @@ import android.widget.Toast;
 
 import com.hadi.mobetes.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +51,9 @@ public class Insert_bsl extends Fragment
     SQLiteDatabase data_db;
     public static final String USERLOGIN = "USERLOGIN";
     Boolean Registered;
+    private static final DateFormat currrentTime = new SimpleDateFormat("h : mm a");
+    private static final DateFormat currentDate = new SimpleDateFormat("d/M/yyyy");
+    private static final DateFormat currentDateTime = new SimpleDateFormat("d/M/yyyy h:mm a");
     //private ArrayList<HashMap<String, String>> listdata;
 
     public Insert_bsl() { }
@@ -70,22 +75,24 @@ public class Insert_bsl extends Fragment
 
         //get the current date and time
         Calendar calender = Calendar.getInstance();
-        int time_get = calender.get(Calendar.HOUR_OF_DAY);
+        /*int time_get = calender.get(Calendar.HOUR_OF_DAY);
         int date_get = calender.get(Calendar.DATE);
         int am_pm = calender.get(Calendar.AM_PM);
 
         //convert to date and time to string
         String times = String.valueOf(time_get);
         String dates = String.valueOf(date_get);
-        String am_pm_s = String.valueOf(am_pm);
+        String am_pm_s = String.valueOf(am_pm);*/
 
         //put the text on textview
         final TextView time = getActivity().findViewById(R.id.fragment_insert_bsl_time);
         final TextView date = getActivity().findViewById(R.id.fragment_insert_bsl_date);
-        time.setText(times+ " " +am_pm_s);
-        date.setText(dates);
+        //time.setText(times+ " " +am_pm_s);
+        //date.setText(dates);
 
-
+        time.setText(currrentTime.format(calender.getTime()));
+        date.setText(currentDate.format(calender.getTime()));
+        currentDateTime.format((calender.getTime()));
     }
 
     //what the application do when the fragment is use
@@ -139,10 +146,10 @@ public class Insert_bsl extends Fragment
         ArrayAdapter adapter1 = ArrayAdapter.createFromResource(this.getActivity(), R.array.condition, R.layout.spinner_item);
         condition.setAdapter(adapter1);
 
-        final Spinner mood = getActivity().findViewById(R.id.fragment_insert_bsl_mood_spinner);
+        /*final Spinner mood = getActivity().findViewById(R.id.fragment_insert_bsl_mood_spinner);
         //set the spinner to use the setting on the spinner_item layout
         ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(), R.array.mood, R.layout.spinner_item);
-        mood.setAdapter(adapter2);
+        mood.setAdapter(adapter2);*/
 
         final Spinner meal = getActivity().findViewById(R.id.fragment_insert_bsl_meal_spinner);
         //set the spinner to use the setting on the spinner_item layout
@@ -239,12 +246,12 @@ public class Insert_bsl extends Fragment
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)
                     {
                         //to make the time set as user choose on time picker dialog
-                        String AM_PM = " AM";
+                        String AM_PM = " am";
                         String mm_precede = "";
 
                         if (hourOfDay >= 12)
                         {
-                            AM_PM = " PM";
+                            AM_PM = " pm";
 
                             if (hourOfDay >= 13 && hourOfDay < 24)
                             {
@@ -647,7 +654,9 @@ public class Insert_bsl extends Fragment
     public void createdb()
     {
         data_db = this.getActivity().openOrCreateDatabase("data_db",MODE_PRIVATE,null);
-        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
+        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
+        //String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR, DATETIME VARCHAR);";
+        //String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
         data_db.execSQL(sqlcreate);
     }
 
@@ -657,7 +666,7 @@ public class Insert_bsl extends Fragment
         final EditText bsl = getActivity().findViewById(R.id.fragment_insert_bsl_bsl);
         final Spinner condition = getActivity().findViewById(R.id.fragment_insert_bsl_condition_spinner);
         final Spinner meal = getActivity().findViewById(R.id.fragment_insert_bsl_meal_spinner);
-        final Spinner mood = getActivity().findViewById(R.id.fragment_insert_bsl_mood_spinner);
+        //final Spinner mood = getActivity().findViewById(R.id.fragment_insert_bsl_mood_spinner);
         final EditText date = getActivity().findViewById(R.id.fragment_insert_bsl_date);
         final EditText time = getActivity().findViewById(R.id.fragment_insert_bsl_time);
         final EditText note = getActivity().findViewById(R.id.fragment_insert_bsl_note);
@@ -667,7 +676,7 @@ public class Insert_bsl extends Fragment
         double bsl1 = Double.parseDouble(bsl.getText().toString());
         String condition1 = condition.getSelectedItem().toString();
         String meal1 = meal.getSelectedItem().toString();
-        String mood1 = mood.getSelectedItem().toString();
+        //String mood1 = mood.getSelectedItem().toString();
         String date1 = date.getText().toString();
         String time1 = time.getText().toString();
         String note1 = note.getText().toString();
@@ -679,13 +688,15 @@ public class Insert_bsl extends Fragment
             if (condition1.equals("Fasting"))
             {
                 String meal2 = "";
-                String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,MOOD,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal2+"','"+mood1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
+                String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal2+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
+                //String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,MOOD,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal2+"','"+mood1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
                 data_db.execSQL(sqlsave);
                 Toast.makeText(this.getActivity(), "Success add BSL", Toast.LENGTH_SHORT).show();
             }
             else
             {
-                String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,MOOD,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal1+"','"+mood1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
+                String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
+                //String sqlsave = "INSERT INTO DATA(CURRENTUSER,BSL,CONDITION,MEAL,MOOD,DATE,TIME,NOTE,TYPE)VALUES('"+currentUser1+"','"+bsl1+"','"+condition1+"','"+meal1+"','"+mood1+"','"+date1+"','"+time1+"','"+note1+"','"+type1+"');";
                 data_db.execSQL(sqlsave);
                 Toast.makeText(this.getActivity(), "Success add BSL", Toast.LENGTH_SHORT).show();
             }

@@ -13,8 +13,8 @@
         android:id="@+id/nav_chart"
         android:icon="@drawable/outline_show_chart_white_48"
         android:title="Chart" />
-    <item
+    <!--<item
         android:id="@+id/nav_reminder"
         android:icon="@drawable/outline_alarm_white_48"
-        android:title="Reminder" />
+        android:title="Reminder" /> -->
 </menu>

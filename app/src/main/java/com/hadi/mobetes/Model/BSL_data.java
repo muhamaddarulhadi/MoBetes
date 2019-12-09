@@ -8,7 +8,7 @@ public class BSL_data
     String mood;
     String note;
     String condition;
-    String bsl;
+    float bsl;
     String type;
 
     public String getDataId()
@@ -51,16 +51,6 @@ public class BSL_data
         this.time = time;
     }
 
-    public String getMood()
-    {
-        return mood;
-    }
-
-    public void setMood(String mood)
-    {
-        this.mood = mood;
-    }
-
     public String getNote()
     {
         return note;
@@ -81,12 +71,12 @@ public class BSL_data
         this.condition = condition;
     }
 
-    public String getBsl()
+    public float getBsl()
     {
         return bsl;
     }
 
-    public void setBsl(String bsl)
+    public void setBsl(float bsl)
     {
         this.bsl = bsl;
     }

@@ -146,6 +146,7 @@ the scroll error-->
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="REGISTER"
+                android:background="@drawable/button_round_corner"
                 android:textSize="20sp" />
         </LinearLayout>
 

@@ -130,10 +130,10 @@ public class Data extends Fragment
                     String data_date = dataarray[3].replace("date=", "");
                     String data_currentUser = dataarray[4].replace("currentuser=", "");
                     String data_condition = dataarray[5].replace("condition=", "");
-                    String data_mood = dataarray[6].replace("mood=", "");
-                    String data_note = dataarray[7].replace("note=", "");
-                    String data_type = dataarray[8].replace("type=", "");
-                    String data_bsl_temp = dataarray[9].replace("bsl=", "");
+                    //String data_mood = dataarray[6].replace("mood=", "");
+                    String data_note = dataarray[6].replace("note=", "");
+                    String data_type = dataarray[7].replace("type=", "");
+                    String data_bsl_temp = dataarray[8].replace("bsl=", "");
                     String data_bsl = data_bsl_temp.replace("}", "");
 
 
@@ -151,7 +151,8 @@ public class Data extends Fragment
                     //String data_note_temp = dataarray[8].replace("note=", "");
                     //String data_note = data_note_temp.replace("}", "");
 
-                    loadDialogOpenData(data_meal,data_id,data_time,data_date,data_currentUser,data_condition,data_mood,data_note,data_type,data_bsl);
+                    loadDialogOpenData(data_meal,data_id,data_time,data_date,data_currentUser,data_condition,data_note,data_type,data_bsl); //amik yag ni
+                    //loadDialogOpenData(data_meal,data_id,data_time,data_date,data_currentUser,data_condition,data_mood,data_note,data_type,data_bsl);
                 }
                 catch (NullPointerException e)
                 {
@@ -215,10 +216,10 @@ public class Data extends Fragment
                         String data_date = dataarray[3].replace("date=", "");
                         String data_currentUser = dataarray[4].replace("currentuser=", "");
                         String data_condition = dataarray[5].replace("condition=", "");
-                        String data_mood = dataarray[6].replace("mood=", "");
-                        String data_note = dataarray[7].replace("note=", "");
-                        String data_type = dataarray[8].replace("type=", "");
-                        String data_bsl_temp = dataarray[9].replace("bsl=", "");
+                        //String data_mood = dataarray[6].replace("mood=", "");
+                        String data_note = dataarray[6].replace("note=", "");
+                        String data_type = dataarray[7].replace("type=", "");
+                        String data_bsl_temp = dataarray[8].replace("bsl=", "");
                         String data_bsl = data_bsl_temp.replace("}", "");
 
 
@@ -237,7 +238,8 @@ public class Data extends Fragment
 
                         //Toast.makeText(Data.this.getActivity(), ""+data_note, Toast.LENGTH_LONG).show();  //test to view Data
 
-                        loadDialogUpdateData(data_meal,data_id,data_bsl,data_condition,data_currentUser,data_mood,data_date,data_time,data_note,data_type);
+                        loadDialogUpdateData(data_meal,data_id,data_bsl,data_condition,data_currentUser,data_date,data_time,data_note,data_type);
+                        //loadDialogUpdateData(data_meal,data_id,data_bsl,data_condition,data_currentUser,data_mood,data_date,data_time,data_note,data_type);
 
                         break;
 
@@ -277,7 +279,9 @@ public class Data extends Fragment
     public void createdb()
     {
         data_db = this.getActivity().openOrCreateDatabase("data_db",MODE_PRIVATE,null);
-        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
+        //String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR, DATETIME VARCHAR);";
+        String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
+        //String sqlcreate = "CREATE TABLE IF NOT EXISTS DATA(DATAID INTEGER PRIMARY KEY AUTOINCREMENT, CURRENTUSER VARCHAR, BSL VARCHAR, CONDITION VARCHAR, MEAL VARCHAR, MOOD VARCHAR, DATE VARCHAR, TIME VARCHAR, NOTE VARCHAR, TYPE VARCHAR);";
         data_db.execSQL(sqlcreate);
     }
 
@@ -286,7 +290,8 @@ public class Data extends Fragment
     {
         final TextView currentUser = getActivity().findViewById(R.id.fragment_data_2_currentUser);
         String currentUser_S = currentUser.getText().toString();
-        String sqlsearch = "SELECT DATAID,CURRENTUSER, BSL, CONDITION, MEAL, MOOD, DATE, TIME, NOTE, TYPE FROM DATA WHERE CURRENTUSER = '"+currentUser_S+"'";
+        String sqlsearch = "SELECT DATAID,CURRENTUSER, BSL, CONDITION, MEAL, DATE, TIME, NOTE, TYPE FROM DATA WHERE CURRENTUSER = '"+currentUser_S+"' ORDER BY DATE DESC";
+        //String sqlsearch = "SELECT DATAID,CURRENTUSER, BSL, CONDITION, MEAL, MOOD, DATE, TIME, NOTE, TYPE FROM DATA WHERE CURRENTUSER = '"+currentUser_S+"'";
         Cursor c = data_db.rawQuery(sqlsearch,null);
         listdata.clear();
         if (c.getCount() > 0)
@@ -299,7 +304,7 @@ public class Data extends Fragment
                 String bsl = c.getString(c.getColumnIndex("BSL"));
                 String condition = c.getString(c.getColumnIndex("CONDITION"));
                 String meal = c.getString(c.getColumnIndex("MEAL"));
-                String mood = c.getString(c.getColumnIndex("MOOD"));
+                //String mood = c.getString(c.getColumnIndex("MOOD"));
                 String date = c.getString(c.getColumnIndex("DATE"));
                 String time = c.getString(c.getColumnIndex("TIME"));
                 String note = c.getString(c.getColumnIndex("NOTE"));
@@ -310,7 +315,7 @@ public class Data extends Fragment
                 datalist.put("bsl",bsl);
                 datalist.put("condition",condition);
                 datalist.put("meal",meal);
-                datalist.put("mood",mood);
+                //datalist.put("mood",mood);
                 datalist.put("date",date);
                 datalist.put("time",time);
                 datalist.put("note",note);
@@ -322,8 +327,10 @@ public class Data extends Fragment
                     Data.this.getActivity(), listdata,
                     //R.layout.custom_list_data, new  //NOT USE
                     R.layout.custom_list_data_2, new
-                    String[]{"dataid","currentuser","bsl","condition","meal","mood","date","time","note","type"}, new
-                    int[]{R.id.custom_list_data_id,R.id.custom_list_data_currentUser,R.id.custom_list_data_bsl,R.id.custom_list_data_condition,R.id.custom_list_data_meal,R.id.custom_list_data_mood,
+                    String[]{"dataid","currentuser","bsl","condition","meal","date","time","note","type"}, new
+                    //String[]{"dataid","currentuser","bsl","condition","meal","mood","date","time","note","type"}, new
+                    int[]{R.id.custom_list_data_id,R.id.custom_list_data_currentUser,R.id.custom_list_data_bsl,R.id.custom_list_data_condition,R.id.custom_list_data_meal,
+                    //int[]{R.id.custom_list_data_id,R.id.custom_list_data_currentUser,R.id.custom_list_data_bsl,R.id.custom_list_data_condition,R.id.custom_list_data_meal,R.id.custom_list_data_mood,
                     R.id.custom_list_data_date,R.id.custom_list_data_time,R.id.custom_list_data_note,R.id.custom_list_data_type});
             //lvdata.setAdapter(adapter);  //NOT USE
             listView.setAdapter(adapter);
@@ -399,7 +406,8 @@ public class Data extends Fragment
     }*/
 
     //load dialog to update Data
-    private void loadDialogUpdateData(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
+    private void loadDialogUpdateData(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String date, final String time, final String note, final String type)
+    //private void loadDialogUpdateData(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
     {
         final Dialog aboutDialog = new Dialog(this.getActivity(), R.style.dialog);
         aboutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -434,7 +442,7 @@ public class Data extends Fragment
         final EditText bsl_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_bsl);
         final Spinner condition_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_condition_spinner);
         final TextView currentUser_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_currentUser);
-        final Spinner mood_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_mood_spinner);
+        //final Spinner mood_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_mood_spinner);
         final TextView type_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_type);
         final EditText date_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_date);
         final TextView dataid_Dialog = aboutDialog.findViewById(R.id.dialog_update_data_dataid);
@@ -445,8 +453,8 @@ public class Data extends Fragment
         //set Data inside spinner to use the custom layout
         ArrayAdapter adapter1 = ArrayAdapter.createFromResource(this.getActivity(), R.array.condition, R.layout.spinner_item);
         condition_Dialog.setAdapter(adapter1);
-        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(), R.array.mood, R.layout.spinner_item);
-        mood_Dialog.setAdapter(adapter2);
+        /*ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this.getActivity(), R.array.mood, R.layout.spinner_item);
+        mood_Dialog.setAdapter(adapter2);*/
         ArrayAdapter adapter3 = ArrayAdapter.createFromResource(this.getActivity(), R.array.meal, R.layout.spinner_item);
         meal_Dialog.setAdapter(adapter3);
 
@@ -485,13 +493,13 @@ public class Data extends Fragment
                 condition_Dialog.setSelection(i);
             }
         }
-        for (int u=0; u< mood_Dialog.getCount();u++)
+        /*for (int u=0; u< mood_Dialog.getCount();u++)
         {
             if(mood_Dialog.getItemAtPosition(u).equals(mood))
             {
                 mood_Dialog.setSelection(u);
             }
-        }
+        }*/
         for (int c=0; c< meal_Dialog.getCount();c++)
         {
             if(meal_Dialog.getItemAtPosition(c).equals(meal))
@@ -540,12 +548,12 @@ public class Data extends Fragment
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute)
                     {
                         //to make the time set as user choose on time picker dialog
-                        String AM_PM = " AM";
+                        String AM_PM = " am";
                         String mm_precede = "";
 
                         if (hourOfDay >= 12)
                         {
-                            AM_PM = " PM";
+                            AM_PM = " pm";
 
                             if (hourOfDay >= 13 && hourOfDay < 24)
                             {
@@ -599,7 +607,7 @@ public class Data extends Fragment
                     String bsl_D_S = String.valueOf(bsl_D);
                     String condition_S = condition_Dialog.getSelectedItem().toString();
                     String meal_S = meal_Dialog.getSelectedItem().toString();
-                    String mood_S = mood_Dialog.getSelectedItem().toString();
+                    //String mood_S = mood_Dialog.getSelectedItem().toString();
                     String date_S = date_Dialog.getText().toString();
                     String time_S = time_Dialog.getText().toString();
                     String note_S = note_Dialog.getText().toString();
@@ -685,7 +693,9 @@ public class Data extends Fragment
                         String type_S = type_Dialog.getText().toString();
 
                         //loadDialogUpdateDataConfirm(dataid_S,bsl_D_S,condition_S,mood_S,date_S,time_S,note_S,type_S);  //NOT USE, default dialog
-                        update(meal_S,dataid_S,bsl_D_S,condition_S,currentUser_S,mood_S,date_S,time_S,note_S,type_S);  //bottom sheet update dialog
+                        update(meal_S,dataid_S,bsl_D_S,condition_S,currentUser_S,date_S,time_S,note_S,type_S);  //bottom sheet update dialog
+                        //update(meal_S,dataid_S,bsl_D_S,condition_S,currentUser_S,mood_S,date_S,time_S,note_S,type_S);  //bottom sheet update dialog
+
                     }
                 }
                 catch (NumberFormatException e)
@@ -782,7 +792,8 @@ public class Data extends Fragment
 
 
     //load dialog to open Data just for view
-    private void loadDialogOpenData(final String meal, final String dataid, final String time, final String date, final String currentUser, final String condition, final String mood, final String note, final String type, final String bsl)
+    private void loadDialogOpenData(final String meal, final String dataid, final String time, final String date, final String currentUser, final String condition, final String note, final String type, final String bsl)
+   // private void loadDialogOpenData(final String meal, final String dataid, final String time, final String date, final String currentUser, final String condition, final String mood, final String note, final String type, final String bsl)
     {
         final Dialog aboutDialog = new Dialog(this.getActivity(), R.style.dialog);
         aboutDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -813,7 +824,7 @@ public class Data extends Fragment
         final TextView meal_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_meal);
         final TextView condition_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_condition);
         final TextView currentUser_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_currentUser);
-        final TextView mood_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_mood);
+        //final TextView mood_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_mood);
         final TextView type_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_type);
         final TextView date_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_date);
         final TextView dataid_Dialog = aboutDialog.findViewById(R.id.dialog_open_data_dataid);
@@ -829,7 +840,7 @@ public class Data extends Fragment
         type_Dialog.setText(type);
         currentUser_Dialog.setText(currentUser);
         condition_Dialog.setText(condition);
-        mood_Dialog.setText(mood);
+        //mood_Dialog.setText(mood);
 
         //close custom dialog box when click done button
         done_dialog.setOnClickListener(new View.OnClickListener()
@@ -871,7 +882,8 @@ public class Data extends Fragment
     }*/
 
     //confirmation Bottom dialog to update data
-    private void update(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
+    private void update(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String date, final String time, final String note, final String type)
+    //private void update(final String meal, final String dataid, final String bsl, final String condition,final String currentUser, final String mood, final String date, final String time, final String note, final String type)
     {
         final BottomSheetDialog bottomSheetUpdate = new BottomSheetDialog(this.getActivity());
         //View sheetView = getActivity().getLayoutInflater().inflate(R.layout.custom_bottom_dialog_update_data, null);
@@ -889,7 +901,8 @@ public class Data extends Fragment
                 if (condition.equals("Fasting"))
                 {
                     String meal1 = "";
-                    String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal1+"', MOOD = '"+mood+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
+                    String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal1+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
+                    //String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal1+"', MOOD = '"+mood+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
                     data_db.execSQL(sqlupdate);
                     loaddata();
                     Toast.makeText(getActivity(), "Success update Data", Toast.LENGTH_SHORT).show();
@@ -897,7 +910,8 @@ public class Data extends Fragment
                 }
                 else
                 {
-                    String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal+"', MOOD = '"+mood+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
+                    String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
+                    //String sqlupdate = "UPDATE DATA SET BSL = '"+bsl+"', CONDITION = '"+condition+"', MEAL = '"+meal+"', MOOD = '"+mood+"', DATE = '"+date+"', TIME = '"+time+"', NOTE = '"+note+"', TYPE = '"+type+"' WHERE DATAID = '"+dataid+"' AND CURRENTUSER = '"+currentUser+"'";
                     data_db.execSQL(sqlupdate);
                     loaddata();
                     Toast.makeText(getActivity(), "Success update Data", Toast.LENGTH_SHORT).show();

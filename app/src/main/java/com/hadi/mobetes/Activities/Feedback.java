@@ -114,7 +114,7 @@ public class Feedback extends AppCompatActivity
                     }
                     else
                     {
-                        String interfaces_S = String.valueOf(interfaces.getText().toString());  //value that auto insert into textView must be put like this
+                        String interfaces_S = interfaces.getText().toString();  //value that auto insert into textView must be put like this
                         String functions_S = functions.getText().toString();
                         String others_S = others.getText().toString();
                         String currentUser_S = currentUser.getText().toString();
