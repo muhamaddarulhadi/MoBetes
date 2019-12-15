@@ -1,5 +1,5 @@
 ## MoBetes
-A minimal malaysian blood sugar monitor application that include several information about diabetes. 
+A minimal malaysian blood sugar monitor application.
 
 ## Features
 1. Insert blood sugar level using mmol/L measurement.
@@ -10,7 +10,6 @@ A minimal malaysian blood sugar monitor application that include several informa
 
 ## Language
 1. Java
-2. SQLite
-3. PHP
-4. HTML (just a little bit)
-5. MySQL
+2. PHP
+3. HTML (just a little bit)
+4. MySQL
